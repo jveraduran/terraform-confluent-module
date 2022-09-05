@@ -75,7 +75,7 @@ resource "confluent_role_binding" "main" {
   count = var.create_api_key ? 1 : 0
   principal   = "User:${confluent_service_account.main[0].id}"
   role_name   = "CloudClusterAdmin"
-  crn_pattern = confluent_kafka_cluster.basic[0].rbac_crn
+  crn_pattern = var.create_basic_cluster == true ? confluent_kafka_cluster.basic[0].rbac_crn : (var.create_standard_cluster == true ? confluent_kafka_cluster.standard[0].rbac_crn : (var.create_dedicated_cluster == true ? confluent_kafka_cluster.dedicated[0].rbac_crn : null))
 }
 
 resource "confluent_api_key" "main" {
@@ -91,9 +91,9 @@ resource "confluent_api_key" "main" {
       kind        = confluent_service_account.main[0].kind
   }
   managed_resource {
-    id          = confluent_kafka_cluster.basic[0].id
-    api_version = confluent_kafka_cluster.basic[0].api_version
-    kind        = confluent_kafka_cluster.basic[0].kind
+    id          = var.create_basic_cluster == true ? confluent_kafka_cluster.basic[0].id : (var.create_standard_cluster == true ? confluent_kafka_cluster.standard[0].id : (var.create_dedicated_cluster == true ? confluent_kafka_cluster.dedicated[0].id : null))
+    api_version = var.create_basic_cluster == true ? confluent_kafka_cluster.basic[0].api_version : (var.create_standard_cluster == true ? confluent_kafka_cluster.standard[0].api_version : (var.create_dedicated_cluster == true ? confluent_kafka_cluster.dedicated[0].api_version : null))
+    kind        = var.create_basic_cluster == true ? confluent_kafka_cluster.basic[0].kind : (var.create_standard_cluster == true ? confluent_kafka_cluster.standard[0].kind : (var.create_dedicated_cluster == true ? confluent_kafka_cluster.dedicated[0].kind : null))
 
     environment {
       id = confluent_environment.main.id
