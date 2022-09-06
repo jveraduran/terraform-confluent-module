@@ -18,7 +18,7 @@ module "confluent_topics" {
   topic_name       = "demo"
   partitions_count = 4
   cluster_id       = var.create_basic_cluster == true ? module.confluent_cluster.basic_cluster_id[0] : (var.create_standard_cluster == true ? module.confluent_cluster.standard_cluster_id[0] : module.confluent_cluster.dedicated_cluster_id[0])
-  environment      = module.confluent_cluster.environment
+  environment      = module.confluent_cluster.confluent_environment_id
   api_key          = module.confluent_cluster.api_key[0]
   api_secret       = module.confluent_cluster.api_secret[0]
 }

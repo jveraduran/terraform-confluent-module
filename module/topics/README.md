@@ -63,4 +63,6 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_confluent_kafka_topic_id"></a> [confluent\_kafka\_topic\_id](#output\_confluent\_kafka\_topic\_id) | n/a |
