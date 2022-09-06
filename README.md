@@ -6,9 +6,7 @@
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_confluent"></a> [confluent](#provider\_confluent) | 1.4.0 |
+No providers.
 
 ## Modules
 
@@ -29,6 +27,9 @@ No resources.
 | <a name="input_cloud"></a> [cloud](#input\_cloud) | n/a | `string` | `null` | no |
 | <a name="input_cloud_api_key"></a> [cloud\_api\_key](#input\_cloud\_api\_key) | n/a | `string` | n/a | yes |
 | <a name="input_cloud_api_secret"></a> [cloud\_api\_secret](#input\_cloud\_api\_secret) | n/a | `string` | n/a | yes |
+| <a name="input_create_basic_cluster"></a> [create\_basic\_cluster](#input\_create\_basic\_cluster) | n/a | `bool` | `false` | no |
+| <a name="input_create_dedicated_cluster"></a> [create\_dedicated\_cluster](#input\_create\_dedicated\_cluster) | n/a | `bool` | `false` | no |
+| <a name="input_create_standard_cluster"></a> [create\_standard\_cluster](#input\_create\_standard\_cluster) | n/a | `bool` | `true` | no |
 | <a name="input_display_name"></a> [display\_name](#input\_display\_name) | n/a | `string` | `null` | no |
 | <a name="input_region"></a> [region](#input\_region) | n/a | `string` | `null` | no |
 

@@ -31,3 +31,21 @@ variable "region" {
   type        = string
   default     = null
 }
+
+variable "create_basic_cluster" {
+  description = ""
+  type        = bool
+  default     = false
+}
+
+variable "create_standard_cluster" {
+  description = ""
+  type        = bool
+  default     = true
+}
+
+variable "create_dedicated_cluster" {
+  description = ""
+  type        = bool
+  default     = false
+}
