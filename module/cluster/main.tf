@@ -72,7 +72,7 @@ resource "confluent_service_account" "main" {
 }
 
 resource "confluent_role_binding" "main" {
-  count = var.create_api_key ? 1 : 0
+  count       = var.create_api_key ? 1 : 0
   principal   = "User:${confluent_service_account.main[0].id}"
   role_name   = "CloudClusterAdmin"
   crn_pattern = var.create_basic_cluster == true ? confluent_kafka_cluster.basic[0].rbac_crn : (var.create_standard_cluster == true ? confluent_kafka_cluster.standard[0].rbac_crn : (var.create_dedicated_cluster == true ? confluent_kafka_cluster.dedicated[0].rbac_crn : null))
@@ -86,9 +86,9 @@ resource "confluent_api_key" "main" {
   # Required
   display_name = var.display_name
   owner {
-      id          = confluent_service_account.main[0].id
-      api_version = confluent_service_account.main[0].api_version
-      kind        = confluent_service_account.main[0].kind
+    id          = confluent_service_account.main[0].id
+    api_version = confluent_service_account.main[0].api_version
+    kind        = confluent_service_account.main[0].kind
   }
   managed_resource {
     id          = var.create_basic_cluster == true ? confluent_kafka_cluster.basic[0].id : (var.create_standard_cluster == true ? confluent_kafka_cluster.standard[0].id : (var.create_dedicated_cluster == true ? confluent_kafka_cluster.dedicated[0].id : null))
@@ -100,5 +100,5 @@ resource "confluent_api_key" "main" {
     }
   }
 
-  
+
 }
