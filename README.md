@@ -12,8 +12,8 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_confluent_cluster"></a> [confluent\_cluster](#module\_confluent\_cluster) | ./module/cluster | n/a |
-| <a name="module_confluent_topics"></a> [confluent\_topics](#module\_confluent\_topics) | ./module/topics | n/a |
+| <a name="module_confluent_cluster"></a> [confluent\_cluster](#module\_confluent\_cluster) | github.com/jveraduran/terraform-confluent-module//module/cluster | v1.0.0 |
+| <a name="module_confluent_topics"></a> [confluent\_topics](#module\_confluent\_topics) | github.com/jveraduran/terraform-confluent-module//module/topics | v1.0.0 |
 
 ## Resources
 
