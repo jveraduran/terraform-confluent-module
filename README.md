@@ -107,7 +107,6 @@ I'm grateful to the community for contributing bugfixes and improvements! Please
 | [confluent_kafka_cluster.standard](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/kafka_cluster) | resource |
 | [confluent_role_binding.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/role_binding) | resource |
 | [confluent_service_account.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/service_account) | resource |
-|------|------|
 | [confluent_kafka_topic.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/kafka_topic) | resource |
 | [confluent_kafka_cluster.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/data-sources/kafka_cluster) | data source |
 
