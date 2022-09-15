@@ -7,9 +7,9 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v4
+      - uses: actions/stale@v5
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.PAT_GITHUB_TOKEN }}
           # Staling issues and PR's
           days-before-stale: 30
           stale-issue-label: stale
