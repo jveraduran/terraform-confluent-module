@@ -1,12 +1,93 @@
+# Confluent - Cluster Module
+<p align="left" style="text-align:left;">
+  <a href="https://www.confluent.io">
+    <img alt="Conflent logo" src="https://d24wuq6o951i2g.cloudfront.net/img/events/id/457/457654228/assets/921.20200122-PNG-confluent_logo-dkblue.png" width="500" />
+  </a>
+</p>
+
+## About this repository
+
+Terraform module which creates Confluent Kafka Cluster with Topic
+## About Confluent
+
+Confluent Platform is a full-scale data streaming platform that enables you to easily access, store, and manage data as continuous, real-time streams. Built by the original creators of Apache Kafka®, Confluent expands the benefits of Kafka with enterprise-grade features while removing the burden of Kafka management or monitoring. Today, over 80% of the Fortune 100 are powered by data streaming technology – and the majority of those leverage Confluent.
+
+## Usage
+
+```
+module "confluent_cluster" {
+  source                   = "github.com/jveraduran/terraform-confluent-module//module/cluster?ref=v1.0.0"
+  display_name             = "demo"
+  availability             = "SINGLE_ZONE"
+  cloud                    = "AWS"
+  region                   = "us-east-2"
+  create_basic_cluster     = var.create_basic_cluster
+  create_standard_cluster  = var.create_standard_cluster
+  create_dedicated_cluster = var.create_dedicated_cluster
+  create_api_key           = true
+}
+
+module "confluent_topics" {
+  depends_on = [
+    module.confluent_cluster
+  ]
+  source           = "github.com/jveraduran/terraform-confluent-module//module/topics?ref=v1.0.0"
+  topic_name       = "demo"
+  partitions_count = 4
+  cluster_id       = var.create_basic_cluster == true ? module.confluent_cluster.basic_cluster_id[0] : (var.create_standard_cluster == true ? module.confluent_cluster.standard_cluster_id[0] : module.confluent_cluster.dedicated_cluster_id[0])
+  environment      = module.confluent_cluster.confluent_environment_id
+  api_key          = module.confluent_cluster.api_key[0]
+  api_secret       = module.confluent_cluster.api_secret[0]
+}
+```
+
+## Examples
+
+[Basic Cluster](examples/aws/basic_cluster/main.tf) Basic clusters are designed for development use-cases. Basic clusters support the following:
+- [99.5% uptime SLA](https://confluent.io/confluent-cloud-uptime-sla/?_ga=2.185632288.840810173.1663253153-1780244465.1660679524)
+- Up to 100 MB/s of throughput and 5 TB of storage.
+- You only pay for the ingress, egress, storage, and partitions. There is no base cluster price.
+- Can be upgraded to a [single-zone Standard cluster](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#standard-cluster) at any time using the Confluent Cloud Console.
+  
+[Standard Cluster](examples/aws/standard_cluster/main.tf) 
+- [Uptime SLA: 99.95% for Single-Zone, 99.99% for Multi-Zone](https://confluent.io/confluent-cloud-uptime-sla/?_ga=2.75410971.840810173.1663253153-1780244465.1660679524)
+- Up to 100 MB/s of throughput and unlimited storage.
+- Multi-zone high availability (optional). A multi-zone cluster is spread across three availability zones for better resiliency.
+- Charged an hourly base price in addition to the ingress, egress, storage, and partitions.
+
+[Dedicated Cluster](examples/aws/dedicated_cluster/main.tf) 
+- Single-tenant deployments with a [99.95% uptime SLA for Single-Zone, and 99.99% for Multi-Zone](https://confluent.io/confluent-cloud-uptime-sla/?_ga=2.121005825.840810173.1663253153-1780244465.1660679524)
+- Private networking options including VPC peering, AWS Transit Gateway, AWS PrivateLink, and Azure PrivateLink.
+- [Self-managed keys](https://docs.confluent.io/cloud/current/clusters/byok/index.html#byok-encrypted-clusters) when AWS or Google Cloud is the cloud service provider.
+- Multi-zone high availability (optional). A multi-zone cluster is spread across three availability zones for better resiliency.
+- Can be scaled to achieve gigabytes per second of ingress.
+- Simple scaling in terms of CKUs.
+- [Cluster expansion](https://docs.confluent.io/cloud/current/clusters/expand.html#cloud-cluster-expand), and [Cluster shrinking](https://docs.confluent.io/cloud/current/clusters/shrink.html#cloud-cluster-shrink).
+
+<br>
+
+## Contributing
+
+I'm grateful to the community for contributing bugfixes and improvements! Please see below to learn how you can take part.
+
+- [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+- [Contributing Guide](./.github/CONTRIBUTING.md)
+
+<br>
+
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_confluent"></a> [confluent](#requirement\_confluent) | 1.4.0 |
 
+<br>
+
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_confluent"></a> [confluent](#provider\_confluent) | 1.4.0 |
 
 ## Modules
 
@@ -17,7 +98,18 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [confluent_api_key.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/api_key) | resource |
+| [confluent_environment.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/environment) | resource |
+| [confluent_kafka_cluster.basic](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/kafka_cluster) | resource |
+| [confluent_kafka_cluster.dedicated](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/kafka_cluster) | resource |
+| [confluent_kafka_cluster.standard](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/kafka_cluster) | resource |
+| [confluent_role_binding.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/role_binding) | resource |
+| [confluent_service_account.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/service_account) | resource |
+|------|------|
+| [confluent_kafka_topic.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/resources/kafka_topic) | resource |
+| [confluent_kafka_cluster.main](https://registry.terraform.io/providers/confluentinc/confluent/1.4.0/docs/data-sources/kafka_cluster) | data source |
 
 ## Inputs
 
