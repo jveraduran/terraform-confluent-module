@@ -43,19 +43,19 @@ module "confluent_topics" {
 
 ## Examples
 
-[Basic Cluster](examples/aws/basic_cluster/main.tf) Basic clusters are designed for development use-cases. Basic clusters support the following:
+[Basic Cluster AWS](examples/aws/basic_cluster/main.tf) | [Basic Cluster GCP](examples/gcp/basic_cluster/main.tf) | [Basic Cluster AZURE](examples/azure/basic_cluster/main.tf) Basic clusters are designed for development use-cases. Basic clusters support the following:
 - [99.5% uptime SLA](https://confluent.io/confluent-cloud-uptime-sla/?_ga=2.185632288.840810173.1663253153-1780244465.1660679524)
 - Up to 100 MB/s of throughput and 5 TB of storage.
 - You only pay for the ingress, egress, storage, and partitions. There is no base cluster price.
 - Can be upgraded to a [single-zone Standard cluster](https://docs.confluent.io/cloud/current/clusters/cluster-types.html#standard-cluster) at any time using the Confluent Cloud Console.
   
-[Standard Cluster](examples/aws/standard_cluster/main.tf) 
+[Standard Cluster AWS](examples/aws/standard_cluster/main.tf) | [Standard Cluster GCP](examples/gcp/standard_cluster/main.tf) | [Standard Cluster AZURE](examples/azure/standard_cluster/main.tf)
 - [Uptime SLA: 99.95% for Single-Zone, 99.99% for Multi-Zone](https://confluent.io/confluent-cloud-uptime-sla/?_ga=2.75410971.840810173.1663253153-1780244465.1660679524)
 - Up to 100 MB/s of throughput and unlimited storage.
 - Multi-zone high availability (optional). A multi-zone cluster is spread across three availability zones for better resiliency.
 - Charged an hourly base price in addition to the ingress, egress, storage, and partitions.
 
-[Dedicated Cluster](examples/aws/dedicated_cluster/main.tf) 
+[Dedicated Cluster AWS](examples/aws/dedicated_cluster/main.tf) | [Dedicated Cluster GCP](examples/gcp/dedicated_cluster/main.tf) | [Dedicated Cluster AZURE](examples/azure/dedicated_cluster/main.tf) 
 - Single-tenant deployments with a [99.95% uptime SLA for Single-Zone, and 99.99% for Multi-Zone](https://confluent.io/confluent-cloud-uptime-sla/?_ga=2.121005825.840810173.1663253153-1780244465.1660679524)
 - Private networking options including VPC peering, AWS Transit Gateway, AWS PrivateLink, and Azure PrivateLink.
 - [Self-managed keys](https://docs.confluent.io/cloud/current/clusters/byok/index.html#byok-encrypted-clusters) when AWS or Google Cloud is the cloud service provider.
