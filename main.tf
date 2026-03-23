@@ -1,5 +1,5 @@
 module "confluent_cluster" {
-  source                   = "github.com/jveraduran/terraform-confluent-module//module/cluster?ref=v1.0.0"
+  source                   = "github.com/jveraduran/terraform-confluent-module//module/cluster?ref=v4.0.0"
   display_name             = "demo"
   availability             = "SINGLE_ZONE"
   cloud                    = "AWS"
